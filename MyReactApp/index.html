@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>React Practice</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- reactの本体 -->
+  <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <!-- DOMに反省させていくkためのライブラリ -->
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <!-- javascriptの新しい文法を使うためのライブラリ、バベル -->
+  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <!-- bebelを使って変換 -->
+  <script type="text/babel">
+    (() => {
+        // propsをもらう
+      function Counter(props) {
+        //   propsのカウンターcolorを表示
+        return (
+            // liで列要素にする　クリックでカウントアップという関数を渡す　
+            // 関数に因数を渡したい場合、無名関数をonclickに渡す
+            //   idハイフン(count)を渡す
+          <li style={{backgroundColor:props.counter.color}} onClick={() => 
+        //   countupという属性を親要素につけて右を下のcounterlistに渡す
+          props.countUp(props.counter)}>
+            {props.counter.id}-({props.counter.count})
+          </li>
+        );
+      }
+// 帰ってくるpropsのcountersをmapで処理
+      function CounterList(props) {
+        const counters = props.counters.map(counter => {
+          return (
+            <Counter
+              counter={counter}
+            //   ループでの処理時に必要
+              key={counter.id}
+            //   propsにcountupを渡す
+              countUp={props.countUp}
+            />
+          );
+        });
+        return (
+          <ul>
+            {counters}
+          </ul>
+        );
+      }
+// stateに置き換えるためにclassが必要
+// Appのコンポーネントができる
+      class App extends React.Component {
+        constructor() {
+            // 親クラスのコンストラクターをsuperで呼ぶ
+          super();
+          this.state = {
+            //   下の5行のデータを保持する
+            counters: [
+                // コンポーネントごとに属性を与える
+              {id: 'A', count: 0, color: 'tomato'},
+              {id: 'B', count: 0, color: 'skyblue'},
+              {id: 'C', count: 0, color: 'limegreen'},
+              {id: 'D', count: 0, color: 'gray'},
+              {id: 'E', count: 0, color: 'pink'}
+            ],
+            // 最初は0
+            total: 0
+          };
+        //   thisをバインドしないといけない
+          this.countUp = this.countUp.bind(this);
+        }
+        countUp(counter) {
+            // reactではコンストラクター以外でstateに
+            // 値を設定するにはsetを使う
+          this.setState(prevState => {
+            const counters = prevState.counters.map(counter => {
+                // 直前の State の値の counters のコピー
+              return {id: counter.id, count: counter.count, color: counter.color};
+            });
+            // mapに処理を任せて1つ1つの要素をカウンターとする
+            const pos = counters.map(counter => {
+              return counter.id;
+            //   何番目のidか
+            }).indexOf(counter.id);
+            // それが分かったらpos番目のカウントを1増やす
+            counters[pos].count++;
+            return {
+                // :は=　右が今増えたカウンターず
+              counters: counters,
+            //   トータルも更新
+              total: prevState.total + 1
+            };
+          });
+        }
+        // renderメソッドで渡す
+        render() {
+            // 一元管理
+          return (
+            //   新しいjsは予約後だからclassname
+            <div className="container">
+              <CounterList
+            //  親要素　全部のcountersをthis.statecountに置き換え
+                counters={this.state.counters}
+
+                countUp={this.countUp}
+              />
+              <div>TOTAL INVENTORY: {this.state.total}</div>
+            </div>
+          );
+        }
+      }
+// reactで作った作品を描画
+      ReactDOM.render(
+        //   コンポーネントの1文字目は大文字
+        <App/>,
+        // root要素に書き込む
+        document.getElementById('root')
+      );
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+body {
+    background: #efdec1;
+    font-size: 14px;
+    font-family: Verdana, sans-serif;
+  }
+  
+  .container {
+    width: 400px;
+    margin: 8px auto;
+    background: #fff;
+    border-radius: 4px;
+    padding: 16px;
+    /* 絶対配置 */
+    position: relative;
+  }
+  
+  #question {
+    margin-bottom: 16px;
+    font-weight: bold;
+  }
+  
+  #choices {
+    /* リストに元からついている黒丸を外す */
+    list-style: none;
+    padding: 0;
+    margin-bottom: 16px;
+  }
+  /* 一つ一つの選択肢 */
+  #choices > li {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    /* 次の選択肢との間 */
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+  /* ホバー時 */
+  #choices > li:hover {
+    background: #f8f8f8;
+  }
+  /* liがcorrectクラスがついたら次のスタイルに設定 */
+  #choices > li.correct {
+    background: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+    font-weight: bold;
+  }
+  
+  #choices > li.correct::after {
+    content: ' ... correct!';
+  }
+  
+  #choices > li.wrong {
+    background: #f8d8da;
+    border-color: #f5c6cb;
+    color: #721c24;
+    font-weight: bold;
+  }
+  
+  #choices > li.wrong::after {
+    content: ' ... wrong!';
+  }
+  /* #result の直下の a にもこのスタイルを設定して */
+  #btn, #result > a {
+    background: #3498db;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    color: #fff;
+    box-shadow: 0 4px 0 #2880b9;
+  }
+  /* 無効時は薄いグレーにする */
+  #btn.disabled {
+    background: #ccc;
+    box-shadow: 0 4px 0 #bbb;
+    opacity: 0.7;
+  }
+  /* モーダルウィンドウとはウィンドウ内で指定された操作を完了、
+  またはキャンセルするまで他のウィンドウを開くことができないウィンドウ */
+  #result {
+    position: absolute;
+    width: 300px;
+    background: #fff;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    top: 50px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    /* 角を丸くする */
+    border-radius: 4px;
+    text-align: center;
+    transition: 0.4s;
+  }
+  /* 最初は隠しておくshowscoreが押されたら外す */
+  #result.hidden {
+    transform: translateY(-500px);
+  }
+  
+  #result > p {
+    font-size: 24px;
+  }
+  
+  #result > a {
+    display: block;
+    text-decoration: none;
+  }

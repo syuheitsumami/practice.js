@@ -1,0 +1,46 @@
+body {
+    /* 等幅フォント */
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    background: #eee;
+  }
+  
+  .container {
+    margin: 20px auto;
+    width: 270px;
+    background: #fff;
+    /* ボタン間 */
+    padding: 15px;
+    text-align: center;
+  }
+  
+  #timer {
+    background: #ddd;
+    height: 120px;
+    line-height: 120px;
+    font-size: 40px;
+    margin-bottom: 15px;
+  }
+  
+  .btn {
+    width: 80px;
+    height: 45px;
+    line-height: 45px;
+    background: #ddd;
+    font-weight: bold;
+    /* 指みたいなやつ */
+    cursor: pointer;
+    /* 選択を無効 */
+    user-select: none;
+  }
+  
+  .controls {
+      /* 親が柔軟な箱 */
+    display: flex;
+    /* 余白を空ける */
+    justify-content: space-between;
+  }
+  
+  .inactive {
+    opacity: 0.6;
+  }

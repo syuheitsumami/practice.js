@@ -1,0 +1,31 @@
+body {
+    background: #efefef;
+  }
+  
+  #btn {
+    width: 200px;
+    height: 200px;
+    background: #ef454a;
+    border-radius: 50%;
+    margin: 30px auto;
+    text-align: center;
+    line-height: 200px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 42px;
+    cursor: pointer;
+    box-shadow: 0 10px 0 #d1483e;
+     /*範囲選択できるかどうかを制御*/ 
+    user-select: none;
+  }
+  /*hovorbtnを旋回する際透過度を0.9にする*/
+  #btn:hover {
+    opacity: 0.9;
+  }
+  /*btnクリック時の動作*/
+  #btn:active {
+   /*影のy高さを半分にする*/   
+    box-shadow: 0 5px 0 #d1483e;
+    /*影分上との感覚を小さくする*/
+    margin-top: 35px;
+  }
